@@ -3,9 +3,8 @@ import {MatPaginator, MatSort} from '@angular/material';
 import {DataDataSource} from './data-datasource';
 import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 import {fromEvent, merge} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
 import {StoreService} from '../../../../core/services/store.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {ListItem} from '../../../../core/models/list-item';
 
 @Component({
