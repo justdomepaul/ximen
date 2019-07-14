@@ -1,0 +1,27 @@
+@import '~bourbon/core/bourbon';
+
+.grid-container {
+  margin: 20px;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.spinner-container {
+  height: 360px;
+  width: calc(100% - 60px);
+  display: flex;
+  justify-content: center;
+  @include position(fixed, null 0);
+  @include margin(null auto);
+}
+
+.add-icon {
+  font-size: 22px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -2px;
+}

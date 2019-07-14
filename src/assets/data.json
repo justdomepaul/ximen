@@ -1,0 +1,22 @@
+[
+  {
+    "number": "A001",
+    "shelf": "TestA",
+    "quantity": 5
+  },
+  {
+    "number": "A002",
+    "shelf": "TestA",
+    "quantity": 55
+  },
+  {
+    "number": "A003",
+    "shelf": "TestB",
+    "quantity": 59
+  },
+  {
+    "number": "A004",
+    "shelf": "TestC",
+    "quantity": 15
+  }
+]

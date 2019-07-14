@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../core/service/auth.service';
-import { map, take, tap } from 'rxjs/operators';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -12,7 +11,6 @@ export class LayoutComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.user$.subscribe((result) => console.log(result));
   }
 
   logout() {

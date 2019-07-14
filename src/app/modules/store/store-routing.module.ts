@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ListComponent} from './list/list.component';
-import {NewComponent} from './new/new.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'store/:store/list',
+    pathMatch: 'full'
+  },
+  {
     path: 'list',
-    component: ListComponent,
+    loadChildren: './list/list.module#ListModule'
   },
   {
     path: 'new',
-    component: NewComponent,
+    loadChildren: './new/new.module#NewModule'
   },
 ];
 

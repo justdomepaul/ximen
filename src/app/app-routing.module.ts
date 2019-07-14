@@ -27,7 +27,7 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: 'store',
+        path: 'store/:store',
         loadChildren: './modules/store/store.module#StoreModule'
       },
     ],
