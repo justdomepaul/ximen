@@ -12,7 +12,7 @@ import {StoreService} from '../../../../core/services/store.service';
  */
 export class DataDataSource extends DataSource<ListItem> {
   data: ListItem[] = [];
-  private StoreItemSubject = new BehaviorSubject<ListItem[]>([]);
+  private ListItemSubject = new BehaviorSubject<ListItem[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
 
   public loading$ = this.loadingSubject.asObservable();
@@ -27,7 +27,7 @@ export class DataDataSource extends DataSource<ListItem> {
    * @returns A stream of the items to be rendered.
    */
   connect(collectionViewer: CollectionViewer): Observable<ListItem[]> {
-    return this.StoreItemSubject.asObservable();
+    return this.ListItemSubject.asObservable();
   }
 
   /**
@@ -35,17 +35,17 @@ export class DataDataSource extends DataSource<ListItem> {
    * any open connections or free any held resources that were set up during connect.
    */
   disconnect(collectionViewer: CollectionViewer): void {
-    this.StoreItemSubject.complete();
+    this.ListItemSubject.complete();
     this.loadingSubject.complete();
   }
 
   loadStoreItem(listSearch: ListSearchProperty) {
     this.loadingSubject.next(true);
-    this.storeService.getBots(listSearch)
+    this.storeService.getLists(listSearch)
       .pipe(
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))
       )
-      .subscribe(storeItems => this.StoreItemSubject.next(storeItems));
+      .subscribe(listItems => this.ListItemSubject.next(listItems));
   }
 }

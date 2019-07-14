@@ -11,7 +11,7 @@ export class StoreService {
   constructor(private http: HttpClient) {
   }
 
-  getBots(search: ListSearchProperty): Observable<ListItem[]> {
+  getLists(search: ListSearchProperty): Observable<ListItem[]> {
     return this.http.get<ListItem[]>('./assets/data.json', {
       params: new HttpParams()
         .set('number', search.number)

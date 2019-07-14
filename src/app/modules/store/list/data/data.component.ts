@@ -4,7 +4,7 @@ import {DataDataSource} from './data-datasource';
 import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 import {fromEvent, merge} from 'rxjs';
 import {StoreService} from '../../../../core/services/store.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ListItem} from '../../../../core/models/list-item';
 
 @Component({
@@ -26,6 +26,7 @@ export class DataComponent implements AfterViewInit, OnInit {
   constructor(
     private storeService: StoreService,
     private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -97,6 +98,7 @@ export class DataComponent implements AfterViewInit, OnInit {
 
   edit(row: ListItem) {
     console.log(row);
+    this.router.navigateByUrl(`/store/${this.storeName}/edit/${row.id}`);
   }
 
   delete(row: ListItem) {

@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'new',
     loadChildren: './new/new.module#NewModule'
   },
+  {
+    path: 'edit/:id',
+    loadChildren: './edit/edit.module#EditModule'
+  },
 ];
 
 @NgModule({
