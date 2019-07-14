@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyCJnTgAzMbG4ewXXJAcvDGiZIO4saPU8Yg',
+    authDomain: 'stockmanager-xinewei.firebaseapp.com',
+    databaseURL: 'https://stockmanager-xinewei.firebaseio.com',
+    projectId: 'stockmanager-xinewei',
+    storageBucket: '',
+    messagingSenderId: '158814778102',
+    appId: '1:158814778102:web:ff7fa27761c14b8d'
+  }
 };
 
 /*

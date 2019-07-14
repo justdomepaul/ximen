@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="layout-toolbar">
+  <!--<button mat-icon-button (click)="sideLeftNav.toggle()"><mat-icon>{{ sideLeftNav.opened ? 'close' : 'menu' }}</mat-icon></button>-->
+  <h1 class="layout-app-name"><a [routerLink]="['/']">登入庫存管理中心</a></h1>
+  <!--<span class="toolbar-separator"></span>-->
+  <!--<button mat-icon-button (click)="logout($event)" matTooltip="登出" matTooltipPosition="left">-->
+    <!--<mat-icon>exit_to_app</mat-icon>-->
+  <!--</button>-->
+</mat-toolbar>
+<mat-sidenav-container class="layout-container">
+  <mat-sidenav-content
+    class="layout-content-container"
+    [class.layout-content]="isLargeScreen"
+    [class.layout-content-small]="!isLargeScreen"
+  >
+    <div id="firebaseui-auth-container" class="layout-firebase-container"></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+

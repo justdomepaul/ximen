@@ -1,0 +1,26 @@
+.layout {
+  &-app-name {
+    font-size: 1.05em;
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:visited {
+        background-color: inherit;
+      }
+    }
+  }
+  &-container {
+    height: 100%;
+  }
+  &-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &-firebase-container {
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 25px 20px 20px;
+    box-shadow: 1px 1px 5px #CCC;
+  }
+}
