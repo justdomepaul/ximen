@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('AuthGuard#canActivate called');
+    // console.log('AuthGuard#canActivate called');
     return new Observable<boolean>((observer) => {
       this.authService.user$.subscribe((user: User) => {
         if (user) {
@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('AuthGuard#canActivateChild called');
+    // console.log('AuthGuard#canActivateChild called');
     return this.canActivate(route, state);
   }
 }

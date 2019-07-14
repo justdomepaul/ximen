@@ -25,3 +25,17 @@
   position: relative;
   top: -2px;
 }
+
+.table {
+  &-row {
+    &:hover {
+      background-color: #CCCCCC;
+      .table-cell {
+        color: #000;
+      }
+    }
+  }
+  &-cell {
+    user-select: text;
+  }
+}
