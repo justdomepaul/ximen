@@ -1,0 +1,58 @@
+@import '~bourbon/core/bourbon';
+.layout {
+  &-toolbar {
+    @include position(fixed, 0);
+    z-index: 2;
+  }
+  &-app-name {
+    font-size: 1.05em;
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:visited {
+        background-color: inherit;
+      }
+    }
+  }
+  &-container {
+    height: 100%;
+  }
+  &-sidenav {
+    top: 64px;
+    &-left,
+    &-right {
+      min-width: 200px;
+    }
+    &-right {
+      max-width: 300px;
+    }
+  }
+  &-sidenav-small {
+    top: 56px;
+    &-left,
+    &-right {
+      min-width: 150px;
+    }
+    &-right {
+      max-width: 250px;
+    }
+  }
+  &-content {
+    height: calc(100vh - 64px);
+    @include padding(74px 30px 30px);
+    //@include margin(64px null null);
+  }
+  &-content-small {
+    height: calc(100vh - 56px);
+    @include padding(66px 20px 20px);
+    //@include margin(56px null null);
+  }
+}
+
+.nav-list {
+  margin-top: 8px;
+}
+
+.toolbar-separator {
+  flex: 1 1 auto;
+}

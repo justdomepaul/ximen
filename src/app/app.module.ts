@@ -12,7 +12,18 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {
   MatToolbarModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatButtonModule,
+  MatIconModule,
+  MatListModule,
+  MatBadgeModule,
+  MatCardModule,
+  MatInputModule,
+  MatMenuModule,
+  MatGridListModule,
+  MatFormFieldModule,
+  MatTooltipModule,
 } from '@angular/material';
 import {environment} from '../environments/environment';
 import {NotFoundComponent} from './modules/not-found/not-found.component';
@@ -38,6 +49,17 @@ import {DashboardComponent} from './modules/dashboard/dashboard.component';
     AngularFireStorageModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatBadgeModule,
+    MatCardModule,
+    MatInputModule,
+    MatMenuModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

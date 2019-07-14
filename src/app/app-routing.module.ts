@@ -3,6 +3,7 @@ import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import {NotFoundComponent} from './modules/not-found/not-found.component';
 import {LayoutComponent} from './modules/layout/layout.component';
 import {DashboardComponent} from './modules/dashboard/dashboard.component';
+import {AuthGuard} from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -12,6 +13,9 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivateChild: [
+      AuthGuard,
+    ],
     children: [
       {
         path: '',

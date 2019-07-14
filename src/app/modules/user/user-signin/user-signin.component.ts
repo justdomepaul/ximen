@@ -38,10 +38,26 @@ export class UserSigninComponent implements OnInit, OnDestroy {
           // Required to enable ID token credentials for this provider.
           // This can be obtained from the Credentials page of the Google APIs
           // console.
-          clientId:
-            '158814778102-051dt3g9ss17u8v2etav50fespuum1o5.apps.googleusercontent.com'
+          clientId: '158814778102-051dt3g9ss17u8v2etav50fespuum1o5.apps.googleusercontent.com',
+          customParameters: {
+            // Forces account selection even when one account
+            // is available.
+            prompt: 'select_account'
+          }
         },
-        // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        // {
+        //   provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        //   scopes: [
+        //     'public_profile',
+        //     'email',
+        //     'user_likes',
+        //     'user_friends'
+        //   ],
+        //   customParameters: {
+        //     // Forces password re-entry.
+        //     auth_type: 'reauthenticate'
+        //   }
+        // },
         // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
         // firebase.auth.GithubAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,

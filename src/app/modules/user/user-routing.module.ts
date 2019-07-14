@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {UserSigninComponent} from './user-signin/user-signin.component';
+import {AuthLoginedGuard} from '../../core/guards/auth-logined.guard';
 
 const routes: Routes = [
   {
@@ -11,6 +12,9 @@ const routes: Routes = [
   {
     path: 'login',
     component: UserSigninComponent,
+    canActivate: [
+      AuthLoginedGuard
+    ],
   },
 ];
 
