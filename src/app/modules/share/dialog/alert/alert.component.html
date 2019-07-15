@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{config.title}}</h2>
+
+<mat-dialog-content>
+  {{config.description}}
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <ng-container *ngIf="!config.hiddenCancel">
+    <button class="mat-raised-button" (click)="close()" >{{config.cancelName}}</button>
+  </ng-container>
+  <button class="mat-raised-button mat-primary" (click)="check()">{{config.checkName}}</button>
+</mat-dialog-actions>

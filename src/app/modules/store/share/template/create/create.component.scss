@@ -1,0 +1,22 @@
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 540px) {
+  .footer-container {
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.data {
+  &-input {
+    margin-bottom: 20px;
+  }
+  &-operator {
+
+  }
+}

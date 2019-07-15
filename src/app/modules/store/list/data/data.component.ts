@@ -31,6 +31,9 @@ export class DataComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.storeName = params.get('store');
+    });
     this.breakpointObserver
       .observe(['(min-width: 599px)'])
       .subscribe((state: BreakpointState) => {

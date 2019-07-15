@@ -12,4 +12,11 @@ export class PageComponent implements OnInit {
   ngOnInit() {
   }
 
+  save(event) {
+    console.log(event);
+  }
+
+  cancel(event) {
+    console.log(event);
+  }
 }

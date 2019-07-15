@@ -29,6 +29,8 @@ import {environment} from '../environments/environment';
 import {NotFoundComponent} from './modules/not-found/not-found.component';
 import {LayoutComponent} from './modules/layout/layout.component';
 import {DashboardComponent} from './modules/dashboard/dashboard.component';
+import {SpinnerModule} from './modules/share/spinner/spinner.module';
+import {DialogModule} from './modules/share/dialog/dialog.module';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import {DashboardComponent} from './modules/dashboard/dashboard.component';
     MatGridListModule,
     MatFormFieldModule,
     MatTooltipModule,
+    SpinnerModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

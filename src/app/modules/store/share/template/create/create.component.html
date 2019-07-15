@@ -1,0 +1,53 @@
+<div class="grid-container">
+  <h1 class="mat-h1">{{ title }}</h1>
+  <form [formGroup]="storeFormGroup">
+    <mat-card class="data-input" formGroupName="productInfo">
+      <mat-card-content>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="產品編號"
+            formControlName="number"
+          >
+          <!--<mat-hint>產品編號</mat-hint>-->
+          <mat-error *ngIf="storeFormGroup.get('productInfo').get('number').hasError('required')">請記得輸入產品編號</mat-error>
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="貨架編號"
+            formControlName="shelf"
+          >
+          <!--<mat-hint>貨架編號</mat-hint>-->
+          <mat-error *ngIf="storeFormGroup.get('productInfo').get('shelf').hasError('required')">請記得輸入貨架</mat-error>
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="產品數量"
+            formControlName="quantity"
+          >
+          <!--<mat-hint>產品數量</mat-hint>-->
+          <mat-error *ngIf="storeFormGroup.get('productInfo').get('quantity').hasError('required')">請記得輸入數量</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="data-operator">
+      <mat-card-content>
+        <div class="footer-container">
+          <button mat-raised-button color="accent" (click)="cancel($event)">
+            <mat-icon>navigate_before</mat-icon>
+            回到「布料庫存列表」
+          </button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button color="primary" (click)="openDialog($event)">&nbsp;&nbsp;&nbsp;&nbsp;{{title}}&nbsp;<mat-icon
+            class="save-icon">save
+          </mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
