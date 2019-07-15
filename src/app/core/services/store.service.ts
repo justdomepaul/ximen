@@ -39,9 +39,9 @@ export class StoreService {
           if (number) { query = query.where('number', '==', number).orderBy('number', 'desc'); }
           if (shelf) { query = query.where('shelf', '==', shelf).orderBy('shelf', 'desc'); }
           return query;
-        }).valueChanges()}
-        )
-    )
+        }).valueChanges();
+      })
+    );
   }
 
   getLists(search: ListSearchProperty): Observable<ListItem[]> {
