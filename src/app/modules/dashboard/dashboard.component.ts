@@ -1,6 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {map} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
+import { AngularfirebaseService } from 'src/app/core/services/angularfirebase.service';
+import { AngularFirestore, QueryFn } from '@angular/fire/firestore';
+import { BehaviorSubject } from 'rxjs';
+import * as firebase from 'firebase';
+
+interface tests {
+  name: string;
+  uid: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -28,10 +37,11 @@ export class DashboardComponent implements OnInit {
       ];
     })
   );
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private angularFirebase: AngularfirebaseService,) {
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

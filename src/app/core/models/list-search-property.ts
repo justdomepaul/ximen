@@ -1,7 +1,7 @@
 export interface ListSearchProperty {
   number: string;
   shelf: string;
-  sortOrder: string;
+  sortOrder: 'desc' | 'asc' | '';
   sortActive: string;
   pageNumber: number;
   pageSize: number;

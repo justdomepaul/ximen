@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort} from '@angular/material';
-import {DataDataSource} from './data-datasource';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 import {fromEvent, merge} from 'rxjs';
 import {StoreService} from '../../../../core/services/store.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ListItem} from '../../../../core/models/list-item';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-data',
@@ -15,81 +15,47 @@ import {ListItem} from '../../../../core/models/list-item';
 export class DataComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('number') number: ElementRef<HTMLInputElement>;
-  @ViewChild('shelf') shelf: ElementRef<HTMLInputElement>;
+  @ViewChild('keyword') keyword: ElementRef<HTMLInputElement>;
   storeName: string;
-  dataSource: DataDataSource;
+  dataSource = new MatTableDataSource();
 
   /** Columns displayed in the table. */
   displayedColumns = ['number', 'shelf', 'quantity', 'management'];
-
+  isLargeScreen: boolean;
   constructor(
     private storeService: StoreService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public breakpointObserver: BreakpointObserver,
   ) {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.storeName = params.get('store');
-    });
-    this.dataSource = new DataDataSource(this.storeService);
-    this.dataSource.loadStoreItem({
-      number: '',
-      shelf: '',
-      sortOrder: 'asc',
-      sortActive: 'number',
-      pageNumber: 0,
-      pageSize: 10,
-    });
+    this.breakpointObserver
+      .observe(['(min-width: 599px)'])
+      .subscribe((state: BreakpointState) => {
+        this.isLargeScreen = state.matches;
+      });
+    return this.storeService.getDocs().subscribe(res => this.dataSource.data = res);
   }
 
   ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.bindEvents();
-
-    // reset the paginator after sorting
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        tap(() => this.loadStoreListsPage())
-      )
-      .subscribe();
   }
 
   bindEvents() {
-    fromEvent(this.number.nativeElement, 'keyup')
+    fromEvent(this.keyword.nativeElement, 'keyup')
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
         tap(() => {
           this.paginator.pageIndex = 0;
-          this.loadStoreListsPage();
+          this.applyFilter(this.keyword.nativeElement.value);
         })
       )
       .subscribe();
-    fromEvent(this.shelf.nativeElement, 'keyup')
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap(() => {
-          this.paginator.pageIndex = 0;
-          this.loadStoreListsPage();
-        })
-      )
-      .subscribe();
-  }
-
-  loadStoreListsPage() {
-    this.dataSource.loadStoreItem({
-      number: this.number.nativeElement.value,
-      shelf: this.shelf.nativeElement.value,
-      sortOrder: this.sort.direction,
-      sortActive: this.sort.active,
-      pageNumber: this.paginator.pageIndex,
-      pageSize: this.paginator.pageSize,
-    });
   }
 
   onRowClicked(row: ListItem) {
@@ -103,5 +69,11 @@ export class DataComponent implements AfterViewInit, OnInit {
 
   delete(row: ListItem) {
     console.log(row);
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 }

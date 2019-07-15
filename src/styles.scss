@@ -3,3 +3,11 @@
 @import "~ionicons/dist/css/ionicons.min.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+mat-header-cell, mat-cell {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+}

@@ -1,4 +1,5 @@
 @import '~bourbon/core/bourbon';
+
 .layout {
   &-toolbar {
     @include position(fixed, 0);

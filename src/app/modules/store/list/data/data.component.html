@@ -1,18 +1,9 @@
 <div class="grid-container">
   <h1 class="mat-h1">布料庫存列表</h1>
   <mat-card>
-    <mat-card-header>
-      <mat-card-title>
-        查詢過濾器
-      </mat-card-title>
-    </mat-card-header>
     <mat-card-content>
       <mat-form-field>
-        <input matInput placeholder="布料編號" #number>
-      </mat-form-field>
-      &nbsp;&nbsp;
-      <mat-form-field>
-        <input matInput placeholder="貨架" #shelf>
+        <input matInput placeholder="關鍵字查詢" #keyword>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
@@ -20,40 +11,39 @@
     </mat-card-actions>
   </mat-card>
   <br/>
-  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
-    <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
-  </div>
   <mat-table #table [dataSource]="dataSource"
               matSort
               matSortActive="number"
               matSortDirection="asc"
               matSortDisableClear
-              aria-label="Elements">
+              aria-label="Elements"
+              align="center"
+              >
     <!-- Number Column -->
     <ng-container matColumnDef="number">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>Number</mat-header-cell>
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>編號</mat-header-cell>
       <mat-cell  *matCellDef="let row" class="table-cell">{{row.number}}</mat-cell>
     </ng-container>
 
     <!-- Shelf Column -->
     <ng-container matColumnDef="shelf">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>Shelf</mat-header-cell>
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>架位</mat-header-cell>
       <mat-cell  *matCellDef="let row" class="table-cell">{{row.shelf}}</mat-cell>
     </ng-container>
 
     <!-- Shelf Column -->
     <ng-container matColumnDef="quantity">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>Quantity</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell">{{row.quantity}}</mat-cell>
+      <mat-header-cell  *matHeaderCellDef mat-sort-header [style.visibility]="isLargeScreen ? 'visible' : 'hidden'">數量</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell" [style.visibility]="isLargeScreen ? 'visible' : 'hidden'">{{row.quantity}} 份</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="management">
       <mat-header-cell *matHeaderCellDef>
         <u>管理</u>
       </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <button mat-button color="primary" (click)="edit(row)">編輯</button>
-        <button mat-button color="warn" (click)="delete(row)">刪除</button>
+      <mat-cell *matCellDef="let row" class="management-cell">
+        <button mat-button color="warn" (click)="edit(row)" class="management-button">編輯</button>
+        <button mat-button color="primary" (click)="delete(row)" class="management-button">刪除</button>
       </mat-cell>
     </ng-container>
 
@@ -62,9 +52,9 @@
   </mat-table>
 
   <mat-paginator #paginator
-                 [length]="dataSource.data.length"
+                 [length]="dataSource.filteredData.length"
                  [pageIndex]="0"
-                 [pageSize]="10"
-                 [pageSizeOptions]="[10, 25, 50, 100, 250]">
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 </div>
