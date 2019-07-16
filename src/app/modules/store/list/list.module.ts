@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {ListRoutingModule} from './list-routing.module';
 import {
   MatTableModule,
+  MatCheckboxModule,
   MatPaginatorModule,
   MatSortModule,
   MatCardModule,
@@ -33,6 +34,7 @@ import { DialogModule } from '../../share/dialog/dialog.module';
     MatListModule,
     MatBadgeModule,
     MatTableModule,
+    MatCheckboxModule,
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,

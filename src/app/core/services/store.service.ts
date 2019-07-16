@@ -29,6 +29,14 @@ export class StoreService {
     return this.afService.delete(`store/${uid}`);
   }
 
+  removes(items: ListItem[]): Promise<void[]> {
+    return this.afService.deletes<ListItem[]>(
+      items.map((item: ListItem): string => {
+        return `store/${item.id}`;
+      })
+    );
+  }
+
   getDoc(uid: string): Observable<StoreItem> {
     return this.afService.doc<StoreItem>(`store/${uid}`).valueChanges();
   }

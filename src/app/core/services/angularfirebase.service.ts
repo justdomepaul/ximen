@@ -11,7 +11,7 @@ import {
 import { AngularFireStorage } from '@angular/fire/storage';
 import * as firebase from 'firebase/app';
 import { from, Observable } from 'rxjs';
-import { expand, map, mergeMap, take, takeWhile, tap } from 'rxjs/operators';
+import {expand, map, mergeAll, mergeMap, take, takeWhile, tap} from 'rxjs/operators';
 
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
 type DocPredicate<T> = string | AngularFirestoreDocument<T>;
@@ -122,7 +122,14 @@ export class AngularfirebaseService {
     return this.doc(ref).delete();
   }
 
-  // Detetes documents as batched transaction
+  deletes<T>(refs: DocPredicate<T>[]): Promise<void[]> {
+    const processes = refs.map((ref) => {
+      return this.doc(ref).delete();
+    });
+    return Promise.all(processes);
+  }
+
+  // deletes documents as batched transaction
   private deleteBatch(path: string, batchSize: number): Observable<any> {
     const colRef = this.aFirestore.collection(path, ref =>
       ref.orderBy('__name__').limit(batchSize)

@@ -7,7 +7,8 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
-      <a mat-raised-button color="primary" [routerLink]="['/', 'store', storeName, 'new']">新增布料庫存<mat-icon class="add-icon">add</mat-icon></a>
+      <a mat-raised-button color="warn" (click)="deleteSelected()" *ngIf="hasSeleted">刪除所選庫存<mat-icon class="specity-icon">delete_sweep</mat-icon></a>
+      <a mat-raised-button color="primary" [routerLink]="['/', 'store', storeName, 'new']">新增布料庫存<mat-icon class="specity-icon">add</mat-icon></a>
     </mat-card-actions>
   </mat-card>
   <br/>
@@ -19,6 +20,22 @@
               aria-label="Elements"
               align="center"
               >
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="checkbox">
+      <mat-header-cell  *matHeaderCellDef>
+        <mat-checkbox #ref (change)="$event ? masterToggle(ref) : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null;isSomeSelected()"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
     <!-- Number Column -->
     <ng-container matColumnDef="number">
       <mat-header-cell  *matHeaderCellDef mat-sort-header>編號</mat-header-cell>
@@ -27,28 +44,32 @@
 
     <!-- Shelf Column -->
     <ng-container matColumnDef="shelf">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>架位</mat-header-cell>
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>櫃位</mat-header-cell>
       <mat-cell  *matCellDef="let row" class="table-cell">{{row.shelf}}</mat-cell>
     </ng-container>
 
     <!-- Shelf Column -->
-    <ng-container matColumnDef="quantity">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header >數量</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell" >{{row.quantity}} 份</mat-cell>
-    </ng-container>
+    <!--<ng-container matColumnDef="quantity">-->
+      <!--<mat-header-cell  *matHeaderCellDef mat-sort-header >數量</mat-header-cell>-->
+      <!--<mat-cell  *matCellDef="let row" class="table-cell" >{{row.quantity}} 尺</mat-cell>-->
+    <!--</ng-container>-->
 
     <ng-container matColumnDef="management">
       <mat-header-cell *matHeaderCellDef>
         <u>管理</u>
       </mat-header-cell>
       <mat-cell *matCellDef="let row" class="management-cell">
-        <button mat-button color="warn" (click)="edit(row)" class="management-button">編輯</button>
-        <button mat-button color="primary" (click)="delete(row)" class="management-button">刪除</button>
+        <button mat-button color="warn" (click)="$event.stopPropagation();edit(row)" class="management-button">編輯</button>
+        <button mat-button color="primary" (click)="$event.stopPropagation();delete(row).subscribe()" class="management-button">刪除</button>
       </mat-cell>
     </ng-container>
 
     <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></mat-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns;"
+      class="table-row"
+      (click)="onRowClicked(row)"
+    ></mat-row>
   </mat-table>
 
   <mat-paginator #paginator

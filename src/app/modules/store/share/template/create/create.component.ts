@@ -54,10 +54,10 @@ export class CreateComponent implements OnInit {
               value: item ? item.shelf : '',
               disabled: this.disabled,
             }, [Validators.required]),
-            quantity: this.fb.control({
-              value: item ? item.quantity : '',
-              disabled: this.disabled,
-            }, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+            // quantity: this.fb.control({
+            //   value: item ? item.quantity : '',
+            //   disabled: this.disabled,
+            // }, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
           })
         });
       },
@@ -74,7 +74,7 @@ export class CreateComponent implements OnInit {
     if (!this.storeFormGroup.valid) {
       return;
     }
-    let resp: StoreItem = this.storeFormGroup.value.productInfo;
+    const resp: StoreItem = this.storeFormGroup.value.productInfo;
     const dialog = this.alertService.openDialog(<AlertConfig> {
       title: '',
       description: '是否確認新增庫存',
