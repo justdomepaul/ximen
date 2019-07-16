@@ -22,3 +22,15 @@ input:-webkit-autofill:active  {
 input:-webkit-autofill {
   -webkit-text-fill-color: white !important;
 }
+
+.mat-table {
+  position:relative;
+  overflow-x: auto;
+  width:100%;
+}
+
+.mat-row, .mat-header-row {
+  min-width: 1300px;
+  width:100%;
+}
+.mat-cell, .mat-header-cell {}

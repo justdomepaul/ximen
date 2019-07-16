@@ -5,7 +5,6 @@ import {fromEvent} from 'rxjs';
 import {StoreService} from '../../../../core/services/store.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ListItem} from '../../../../core/models/list-item';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { AlertConfig } from 'src/app/core/models/alert-config';
 import { FullSpinnerService } from 'src/app/core/services/full-spinner.service';
@@ -24,12 +23,10 @@ export class DataComponent implements AfterViewInit, OnInit {
 
   /** Columns displayed in the table. */
   displayedColumns = ['number', 'shelf', 'quantity', 'management'];
-  isLargeScreen: boolean;
   constructor(
     private storeService: StoreService,
     private route: ActivatedRoute,
     private router: Router,
-    public breakpointObserver: BreakpointObserver,
     public alertService: AlertService,
     private spinnerService: FullSpinnerService,
     private snackBar: MatSnackBar
@@ -40,11 +37,6 @@ export class DataComponent implements AfterViewInit, OnInit {
     this.route.paramMap.subscribe(params => {
       this.storeName = params.get('store');
     });
-    this.breakpointObserver
-      .observe(['(min-width: 599px)'])
-      .subscribe((state: BreakpointState) => {
-        this.isLargeScreen = state.matches;
-      });
     this.storeService.getDocs().subscribe((res) => {
       this.dataSource.data = res
       this.spinnerService.closeSpinner();

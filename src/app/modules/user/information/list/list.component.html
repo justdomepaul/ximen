@@ -16,22 +16,34 @@
               aria-label="Elements"
               align="center"
               >
-    <!-- Number Column -->
-    <ng-container matColumnDef="number">
+    <!-- uid Column -->
+    <ng-container matColumnDef="uid">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.uid}}</mat-cell>
+    </ng-container>
+
+    <!-- displayName Column -->
+    <ng-container matColumnDef="displayName">
       <mat-header-cell  *matHeaderCellDef mat-sort-header>名稱</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell">{{row.number}}</mat-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.displayName}}</mat-cell>
     </ng-container>
 
-    <!-- Shelf Column -->
-    <ng-container matColumnDef="shelf">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>架位</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell">{{row.shelf}}</mat-cell>
+    <!-- email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.email}}</mat-cell>
     </ng-container>
 
-    <!-- Shelf Column -->
-    <ng-container matColumnDef="quantity">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header [style.visibility]="isLargeScreen ? 'visible' : 'hidden'">數量</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell" [style.visibility]="isLargeScreen ? 'visible' : 'hidden'">{{row.quantity}} 份</mat-cell>
+    <!-- phoneNumber Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>手機號碼</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.phoneNumber}}</mat-cell>
+    </ng-container>
+
+    <!-- role Column -->
+    <ng-container matColumnDef="role">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>等級</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.role | json}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="management">

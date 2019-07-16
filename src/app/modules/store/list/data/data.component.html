@@ -33,8 +33,8 @@
 
     <!-- Shelf Column -->
     <ng-container matColumnDef="quantity">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header [style.visibility]="isLargeScreen ? 'visible' : 'hidden'">數量</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell" [style.visibility]="isLargeScreen ? 'visible' : 'hidden'">{{row.quantity}} 份</mat-cell>
+      <mat-header-cell  *matHeaderCellDef mat-sort-header >數量</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell" >{{row.quantity}} 份</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="management">

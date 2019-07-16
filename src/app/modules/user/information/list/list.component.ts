@@ -1,12 +1,11 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource, MatSnackBar} from '@angular/material';
-import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, tap, map} from 'rxjs/operators';
 import {fromEvent} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ListItem} from '../../../../core/models/list-item';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import {Router} from '@angular/router';
 import { FullSpinnerService } from 'src/app/core/services/full-spinner.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-list',
@@ -20,26 +19,17 @@ export class ListComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
 
   /** Columns displayed in the table. */
-  displayedColumns = ['number', 'shelf', 'quantity', 'management'];
-  isLargeScreen: boolean;
+  displayedColumns = ['uid', 'displayName', 'email', 'phoneNumber', 'role', 'management'];
   constructor(
     private authService: AuthService,
-    private route: ActivatedRoute,
     private router: Router,
-    public breakpointObserver: BreakpointObserver,
     private spinnerService: FullSpinnerService,
-    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
     this.spinnerService.showSpinner();
-    this.breakpointObserver
-      .observe(['(min-width: 599px)'])
-      .subscribe((state: BreakpointState) => {
-        this.isLargeScreen = state.matches;
-      });
-    this.authService.getDocs().subscribe((res) => {
-      this.dataSource.data = res
+    this.authService.getDocs().subscribe((res: User[]) => {
+      this.dataSource.data = res;
       this.spinnerService.closeSpinner();
     });
   }
@@ -69,11 +59,11 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  onRowClicked(row: ListItem) {
+  onRowClicked(row: User) {
     console.log('row clicked:', row);
   }
 
-  edit(row: ListItem) {
-    this.router.navigateByUrl(`/information/edit/${row.id}`);
+  edit(row: User) {
+    this.router.navigateByUrl(`/information/edit/${row.uid}`);
   }
 }
