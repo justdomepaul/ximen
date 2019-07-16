@@ -5,8 +5,6 @@ import {fromEvent} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ListItem} from '../../../../core/models/list-item';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { AlertService } from 'src/app/core/services/alert.service';
-import { AlertConfig } from 'src/app/core/models/alert-config';
 import { FullSpinnerService } from 'src/app/core/services/full-spinner.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -15,7 +13,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('keyword') keyword: ElementRef<HTMLInputElement>;
@@ -29,7 +27,6 @@ export class ListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public breakpointObserver: BreakpointObserver,
-    public alertService: AlertService,
     private spinnerService: FullSpinnerService,
     private snackBar: MatSnackBar
   ) { }

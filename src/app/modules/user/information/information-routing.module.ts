@@ -5,6 +5,11 @@ import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/information/list',
+    pathMatch: 'full'
+  },
+  {
     path: 'list',
     component: ListComponent,
   },

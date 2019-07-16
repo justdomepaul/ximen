@@ -14,9 +14,6 @@ export class AuthRoleGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return new Observable<boolean>((observer) => {
       this.authService.user$.subscribe((user: User) => {
-        console.log(user)
-        console.log(user.roles.hasOwnProperty('admin'))
-        console.log(user.roles.admin)
         if (user.roles.hasOwnProperty('admin') && user.roles.admin) {
           observer.next(true);
           observer.complete();

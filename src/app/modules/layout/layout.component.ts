@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-layout',
@@ -9,6 +10,7 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 })
 export class LayoutComponent implements OnInit {
   isLargeScreen: boolean;
+  admin = false;
   constructor(private authService: AuthService, public breakpointObserver: BreakpointObserver) { }
 
   ngOnInit() {
@@ -17,6 +19,11 @@ export class LayoutComponent implements OnInit {
       .subscribe((state: BreakpointState) => {
         this.isLargeScreen = state.matches;
       });
+    this.authService.user$.subscribe((user: User) => {
+      if (user.roles.hasOwnProperty('admin') && user.roles.admin) {
+        this.admin = true;
+      }
+    })
   }
 
   logout() {
