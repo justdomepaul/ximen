@@ -10,7 +10,9 @@ import {
   MatInputModule,
   MatChipsModule,
   MatIconModule,
+  MatSnackBarModule,
 } from '@angular/material';
+import { DialogModule } from 'src/app/modules/share/dialog/dialog.module';
 @NgModule({
   exports: [
     CreateComponent
@@ -25,6 +27,8 @@ import {
     MatInputModule,
     MatChipsModule,
     MatIconModule,
+    MatSnackBarModule,
+    DialogModule.forRoot(),
   ],
   declarations: [
     CreateComponent

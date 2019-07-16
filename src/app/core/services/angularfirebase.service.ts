@@ -35,6 +35,10 @@ export class AngularfirebaseService {
     return firebase.firestore.FieldValue.serverTimestamp();
   }
 
+  getUID(): string {
+    return this.aFirestore.createId();
+  }
+
   add<T>(
     ref: CollectionPredicate<T>,
     data

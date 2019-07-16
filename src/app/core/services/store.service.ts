@@ -5,16 +5,7 @@ import {ListSearchProperty} from '../models/list-search-property';
 import {ListItem} from '../models/list-item';
 import { AngularfirebaseService } from './angularfirebase.service';
 import { switchMap } from 'rxjs/operators';
-
-interface OrderBy {
-  sortOrder: 'desc' | 'asc' | '';
-  sortActive: string;
-}
-
-interface Pagination {
-  pageNumber: number;
-  pageSize: number;
-}
+import { StoreItem } from '../models/store-item';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +15,23 @@ export class StoreService {
   numberFilter$: BehaviorSubject<string|null>;
   shelfFilter$: BehaviorSubject<string|null>;
   constructor(private http: HttpClient, private afService: AngularfirebaseService) {}
+
+  upsert(item: StoreItem, isNew: boolean): Promise<void> {
+    if (isNew) {
+      item.id = this.afService.getUID();
+      item.createdAt = this.afService.timestamp;
+    }
+    item.updatedAt = this.afService.timestamp;
+    return this.afService.upsert(`store/${item.id}`, item);
+  }
+
+  remove(uid: string): Promise<void> {
+    return this.afService.delete(`store/${uid}`);
+  }
+
+  getDoc(uid: string): Observable<StoreItem> {
+    return this.afService.doc<StoreItem>(`store/${uid}`).valueChanges();
+  }
 
   getDocs(filters?: any) {
     this.numberFilter$ = new BehaviorSubject(null);

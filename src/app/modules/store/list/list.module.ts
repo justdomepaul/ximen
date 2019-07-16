@@ -16,8 +16,10 @@ import {
   MatMenuModule,
   MatGridListModule,
   MatProgressSpinnerModule,
+  MatSnackBarModule,
 } from '@angular/material';
 import {DataComponent} from './data/data.component';
+import { DialogModule } from '../../share/dialog/dialog.module';
 
 @NgModule({
   declarations: [DataComponent],
@@ -37,6 +39,8 @@ import {DataComponent} from './data/data.component';
     MatMenuModule,
     MatGridListModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
+    DialogModule.forRoot(),
   ]
 })
 export class ListModule {

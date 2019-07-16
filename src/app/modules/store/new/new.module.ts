@@ -5,6 +5,8 @@ import {NewRoutingModule} from './new-routing.module';
 import {PageComponent} from './page/page.component';
 import {TemplateModule} from '../share/template/template.module';
 import {DialogModule} from '../../share/dialog/dialog.module';
+import { MatSnackBarModule } from '@angular/material';
+import { SpinnerModule } from '../../share/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -13,8 +15,10 @@ import {DialogModule} from '../../share/dialog/dialog.module';
   imports: [
     CommonModule,
     NewRoutingModule,
+    MatSnackBarModule,
     TemplateModule.forRoot(),
     DialogModule.forRoot(),
+    SpinnerModule.forRoot(),
   ]
 })
 export class NewModule {
