@@ -40,12 +40,12 @@
     <mat-card class="data-operator">
       <mat-card-content>
         <div class="footer-container">
-          <button mat-raised-button color="accent" (click)="cancel($event)">
+          <a mat-raised-button color="accent" (click)="cancel($event)">
             <mat-icon>navigate_before</mat-icon>
             回到「布料庫存列表」
-          </button>
+          </a>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button color="primary" type="submit" (click)="openDialog($event)" aria-disabled="disabled">
+          <button mat-raised-button color="primary" type="submit" (click)="openDialog($event)" aria-disabled="disabled" *ngIf="!disabled">
             &nbsp;&nbsp;&nbsp;&nbsp;{{title}}&nbsp;<mat-icon class="save-icon">save</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;
           </button>
         </div>

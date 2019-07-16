@@ -104,7 +104,7 @@ export class DataComponent implements AfterViewInit, OnInit {
   delete(row: ListItem) {
     const dialog = this.alertService.openDialog(<AlertConfig> {
       title: '',
-      description: `是否刪除該庫存品項，庫存編號:${row.number}`,
+      description: `是否刪除該庫存品項，庫存編號: ${row.number}`,
       hiddenCancel: false,
       checkName: '確認',
       cancelName: '取消',
@@ -114,7 +114,7 @@ export class DataComponent implements AfterViewInit, OnInit {
     dialog.componentInstance.Check.subscribe((result) => {
       this.storeService.remove(row.id).then(
         () => {
-          this.snackBar.open(`已成功刪除庫存品項，庫存編號：${row.number}`, 'Close', {
+          this.snackBar.open(`已成功刪除庫存品項，庫存編號： ${row.number}`, 'Close', {
             duration: 1500,
             panelClass: 'success'
           });
@@ -177,7 +177,7 @@ export class DataComponent implements AfterViewInit, OnInit {
     } else {
       this.isAllSelected() ?
         this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+        this.dataSource.data.forEach((row: ListItem) => this.selection.select(row));
     }
   }
 

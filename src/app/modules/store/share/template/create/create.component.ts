@@ -74,6 +74,7 @@ export class CreateComponent implements OnInit {
     if (!this.storeFormGroup.valid) {
       return;
     }
+    this.disabled = true;
     const resp: StoreItem = this.storeFormGroup.value.productInfo;
     const dialog = this.alertService.openDialog(<AlertConfig> {
       title: '',
@@ -90,6 +91,7 @@ export class CreateComponent implements OnInit {
     });
 
     dialog.componentInstance.Close.subscribe((result) => {
+      this.disabled = false;
       dialog.close();
     });
   }

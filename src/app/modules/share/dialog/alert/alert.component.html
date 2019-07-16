@@ -6,7 +6,7 @@
 
 <mat-dialog-actions align="center">
   <ng-container *ngIf="!config.hiddenCancel">
-    <button class="mat-raised-button" (click)="close()" >{{config.cancelName}}</button>
+    <a class="mat-raised-button" (click)="close()" >{{config.cancelName}}</a>
   </ng-container>
-  <button class="mat-raised-button mat-primary" (click)="check()">{{config.checkName}}</button>
+  <button type="submit" class="mat-raised-button mat-primary" (click)="check()">{{config.checkName}}</button>
 </mat-dialog-actions>
