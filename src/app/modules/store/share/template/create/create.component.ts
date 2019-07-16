@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material';
 export class CreateComponent implements OnInit {
   private _storeItem = new BehaviorSubject<StoreItem>(null);
 
+  @Input() new: boolean;
   @Input() title: string;
   @Input()
   set storeItem(value) {
@@ -25,6 +26,8 @@ export class CreateComponent implements OnInit {
   }
 
   storeFormGroup: FormGroup;
+  disabled = false;
+
   @Output()
   Save = new EventEmitter();
   @Output()
@@ -35,26 +38,25 @@ export class CreateComponent implements OnInit {
     private location: Location,
     private alertService: AlertService,
     private snackBar: MatSnackBar
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-    // this.defaultFormGroup(this.storeItem);
     this._storeItem.subscribe(
       (item: StoreItem) => {
+        this.disabled = !this.new && !item ? true : false;
         this.storeFormGroup = this.fb.group({
           productInfo: this.fb.group({
             number: this.fb.control({
               value: item ? item.number : '',
-              disabled: false,
+              disabled: this.disabled,
             }, [Validators.required]),
             shelf: this.fb.control({
               value: item ? item.shelf : '',
-              disabled: false,
+              disabled: this.disabled,
             }, [Validators.required]),
             quantity: this.fb.control({
               value: item ? item.quantity : '',
-              disabled: false,
+              disabled: this.disabled,
             }, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
           })
         });

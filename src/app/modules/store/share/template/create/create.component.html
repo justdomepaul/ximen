@@ -45,9 +45,8 @@
             回到「布料庫存列表」
           </button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button color="primary" type="submit" (click)="openDialog($event)">&nbsp;&nbsp;&nbsp;&nbsp;{{title}}&nbsp;<mat-icon
-            class="save-icon">save
-          </mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button color="primary" type="submit" (click)="openDialog($event)" aria-disabled="disabled">
+            &nbsp;&nbsp;&nbsp;&nbsp;{{title}}&nbsp;<mat-icon class="save-icon">save</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;
           </button>
         </div>
       </mat-card-content>

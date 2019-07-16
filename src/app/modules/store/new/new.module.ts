@@ -17,8 +17,6 @@ import { SpinnerModule } from '../../share/spinner/spinner.module';
     NewRoutingModule,
     MatSnackBarModule,
     TemplateModule.forRoot(),
-    DialogModule.forRoot(),
-    SpinnerModule.forRoot(),
   ]
 })
 export class NewModule {
