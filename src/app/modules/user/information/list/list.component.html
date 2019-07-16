@@ -1,0 +1,56 @@
+<div class="grid-container">
+  <h1 class="mat-h1">會員列表</h1>
+  <mat-card>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="關鍵字查詢" #keyword>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+  <br/>
+  <mat-table #table [dataSource]="dataSource"
+              matSort
+              matSortActive="number"
+              matSortDirection="asc"
+              matSortDisableClear
+              aria-label="Elements"
+              align="center"
+              >
+    <!-- Number Column -->
+    <ng-container matColumnDef="number">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>編號</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.number}}</mat-cell>
+    </ng-container>
+
+    <!-- Shelf Column -->
+    <ng-container matColumnDef="shelf">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>架位</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.shelf}}</mat-cell>
+    </ng-container>
+
+    <!-- Shelf Column -->
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header [style.visibility]="isLargeScreen ? 'visible' : 'hidden'">數量</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell" [style.visibility]="isLargeScreen ? 'visible' : 'hidden'">{{row.quantity}} 份</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="management">
+      <mat-header-cell *matHeaderCellDef>
+        <u>管理</u>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="management-cell">
+        <button mat-button color="warn" (click)="edit(row)" class="management-button">編輯</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [length]="dataSource.filteredData.length"
+                 [pageIndex]="0"
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>

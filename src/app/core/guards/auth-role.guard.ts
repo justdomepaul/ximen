@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
-import {AuthService} from '../services/auth.service';
-import {User} from '../models/user';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthRoleGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthService) {
   }
 
@@ -15,7 +15,9 @@ export class AuthGuard implements CanActivate {
     return new Observable<boolean>((observer) => {
       this.authService.user$.subscribe((user: User) => {
         console.log(user)
-        if (user) {
+        console.log(user.roles.hasOwnProperty('admin'))
+        console.log(user.roles.admin)
+        if (user.roles.hasOwnProperty('admin') && user.roles.admin) {
           observer.next(true);
           observer.complete();
         } else {

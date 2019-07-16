@@ -15,9 +15,16 @@
   >
     <mat-nav-list class="nav-list">
       <h3 matSubheader>
-        <mat-icon>android</mat-icon>&nbsp;布料庫存
+        <mat-icon>business_center</mat-icon>&nbsp;布料庫存
       </h3>
       <a mat-list-item [routerLink]="['/', 'store', 'xi-men', 'list']" class="layout-link-item">西門店</a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
+    <mat-nav-list class="nav-list">
+      <h3 matSubheader>
+        <mat-icon>android</mat-icon>&nbsp;會員管理
+      </h3>
+      <a mat-list-item [routerLink]="['/', 'information', 'list']" class="layout-link-item">會員列表</a>
     </mat-nav-list>
   </mat-sidenav>
 

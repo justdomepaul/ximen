@@ -4,6 +4,7 @@ import {NotFoundComponent} from './modules/not-found/not-found.component';
 import {LayoutComponent} from './modules/layout/layout.component';
 import {DashboardComponent} from './modules/dashboard/dashboard.component';
 import {AuthGuard} from './core/guards/auth.guard';
+import { AuthRoleGuard } from './core/guards/auth-role.guard';
 
 const routes: Routes = [
   {
@@ -29,6 +30,13 @@ const routes: Routes = [
       {
         path: 'store/:store',
         loadChildren: './modules/store/store.module#StoreModule'
+      },
+      {
+        path: 'information',
+        canActivateChild: [
+          AuthRoleGuard,
+        ],
+        loadChildren: './modules/user/information/information.module#InformationModule'
       },
     ],
   },

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import {AngularFirestoreDocument} from '@angular/fire/firestore';
 import {User} from '../models/user';
@@ -18,6 +18,11 @@ import {AngularfirebaseService} from './angularfirebase.service';
   providedIn: 'root'
 })
 export class AuthService {
+  items$: Observable<User[]>;
+  displayNameFilter$: BehaviorSubject<string|null>;
+  emailFilter$: BehaviorSubject<string|null>;
+  phoneNumber$: BehaviorSubject<string|null>;
+  uid$: BehaviorSubject<string|null>;
   user$: Observable<User>;
   redirecting = false;
   constructor(
@@ -76,6 +81,31 @@ export class AuthService {
         });
       }
     });
+  }
+
+  getDocs(filters?: any) {
+    this.displayNameFilter$ = new BehaviorSubject(null);
+    this.emailFilter$ = new BehaviorSubject(null);
+    this.phoneNumber$ = new BehaviorSubject(null);
+    this.uid$ = new BehaviorSubject(null);
+
+    return this.items$ = combineLatest(
+      this.displayNameFilter$,
+      this.emailFilter$,
+      this.phoneNumber$,
+      this.uid$,
+    ).pipe(
+      switchMap(([displayName, email, phone,  uid]) => {
+        return this.db.col<User>('users', ref => {
+          let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+          if (displayName) { query = query.where('displayName', '==', displayName).orderBy('displayName', 'desc'); }
+          if (email) { query = query.where('email', '==', email).orderBy('email', 'desc'); }
+          if (phone) { query = query.where('phone', '==', phone).orderBy('phone', 'desc'); }
+          if (uid) { query = query.where('uid', '==', uid).orderBy('uid', 'desc'); }
+          return query;
+        }).valueChanges();
+      })
+    );
   }
 
   private afAuthLogin(provider: AuthProvider) {

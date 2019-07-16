@@ -13,8 +13,7 @@ import * as firebaseui from 'firebaseui';
 export class UserSigninComponent implements OnInit, OnDestroy {
   constructor(
     public breakpointObserver: BreakpointObserver,
-    public afAuth: AngularFireAuth,
-    private router: Router) {}
+    public afAuth: AngularFireAuth,) {}
   isLargeScreen: boolean;
   ui: firebaseui.auth.AuthUI;
   ngOnDestroy(): void {
