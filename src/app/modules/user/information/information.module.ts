@@ -21,9 +21,13 @@ import {
   MatSnackBarModule,
 } from '@angular/material';
 import { DialogModule } from '../../share/dialog/dialog.module';
+import { AuthRolePipeModule } from '../../share/auth-role-pipe/auth-role-pipe.module';
 
 @NgModule({
-  declarations: [ListComponent, EditComponent],
+  declarations: [
+    ListComponent,
+    EditComponent,
+  ],
   imports: [
     CommonModule,
     InformationRoutingModule,
@@ -42,6 +46,7 @@ import { DialogModule } from '../../share/dialog/dialog.module';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     DialogModule.forRoot(),
+    AuthRolePipeModule,
   ]
 })
 export class InformationModule { }

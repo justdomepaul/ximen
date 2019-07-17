@@ -43,7 +43,7 @@
     <!-- role Column -->
     <ng-container matColumnDef="role">
       <mat-header-cell  *matHeaderCellDef mat-sort-header>等級</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell">{{row.role | json}}</mat-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.roles | authRole}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="management">
