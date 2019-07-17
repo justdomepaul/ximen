@@ -19,7 +19,7 @@ export class ListComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
 
   /** Columns displayed in the table. */
-  displayedColumns = ['uid', 'displayName', 'email', 'phoneNumber', 'role', 'management'];
+  displayedColumns = ['management', 'displayName', 'role', 'uid', 'email', 'phoneNumber'];
   constructor(
     private authService: AuthService,
     private router: Router,

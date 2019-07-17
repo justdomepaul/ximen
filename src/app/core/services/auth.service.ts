@@ -53,7 +53,7 @@ export class AuthService {
               emailVerified: user.emailVerified,
               displayName: user.displayName || user.email || user.phoneNumber,
               phoneNumber: user.phoneNumber,
-              photoURL: user.photoURL
+              photoURL: user.photoURL,
             };
             const uid = user.uid;
             const updatedUser = { uid, ...value.data() };
@@ -81,6 +81,22 @@ export class AuthService {
         });
       }
     });
+  }
+
+  upsert(item: User): Promise<void> {
+    return this.db.upsert(`users/${item.uid}`, item);
+  }
+
+  getDoc(uid: string): Observable<User> {
+    return this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.db.doc<User>(`users/${uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
   }
 
   getDocs(filters?: any) {

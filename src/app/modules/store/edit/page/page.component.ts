@@ -12,13 +12,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PageComponent implements OnInit {
   storeItem: StoreItem;
+  uid: string;
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private storeService: StoreService,
     private snackBar: MatSnackBar
   ) { }
-  uid: string;
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.uid = params.get('id');

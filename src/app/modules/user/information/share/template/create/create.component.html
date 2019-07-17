@@ -1,0 +1,46 @@
+<div class="grid-container">
+  <h1 class="mat-h1">{{ title }}</h1>
+  <form [formGroup]="userFormGroup">
+    <mat-card class="data-input">
+      <mat-card-content>
+        <h4>是否為管理員</h4>
+        <mat-radio-group aria-label="Select an option" formControlName="admin" color="primary">
+          <mat-radio-button [value]="true">管理員</mat-radio-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <mat-radio-button [value]="false">非管理員</mat-radio-button>
+        </mat-radio-group>
+        <mat-error *ngIf="userFormGroup.get('admin').hasError('required')">請選擇是否有管理員權限</mat-error>
+
+        <h4>是否為編輯者</h4>
+        <mat-radio-group aria-label="Select an option" formControlName="editor" color="primary">
+          <mat-radio-button [value]="true">編輯者</mat-radio-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <mat-radio-button [value]="false">非編輯者</mat-radio-button>
+        </mat-radio-group>
+        <mat-error *ngIf="userFormGroup.get('editor').hasError('required')">請選擇是否有編輯者權限</mat-error>
+
+        <h4>是否為黑名單用戶</h4>
+        <mat-radio-group aria-label="Select an option" formControlName="subscriber" color="warn">
+          <mat-radio-button [value]="false">黑單用戶</mat-radio-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <mat-radio-button [value]="true">正常用戶</mat-radio-button>
+        </mat-radio-group>
+        <mat-error *ngIf="userFormGroup.get('editor').hasError('required')">請選擇是否有編輯者權限</mat-error>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="data-operator">
+      <mat-card-content>
+        <div class="footer-container">
+          <a mat-raised-button color="accent" (click)="cancel($event)">
+            <mat-icon>navigate_before</mat-icon>
+            回到「會員列表」
+          </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button color="primary" type="submit" (click)="openDialog($event)" aria-disabled="disabled" *ngIf="!disabled">
+            &nbsp;&nbsp;&nbsp;&nbsp;{{title}}&nbsp;<mat-icon class="save-icon">save</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

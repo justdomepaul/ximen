@@ -9,6 +9,8 @@ import {AlertService} from 'src/app/core/services/alert.service';
 import {AlertConfig} from 'src/app/core/models/alert-config';
 import {FullSpinnerService} from 'src/app/core/services/full-spinner.service';
 import {SelectionModel} from '@angular/cdk/collections';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-data',
@@ -23,11 +25,13 @@ export class DataComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
   selection = new SelectionModel<ListItem>(true, []);
   hasSeleted = false;
+  permission = false;
   /** Columns displayed in the table. */
-  displayedColumns = ['checkbox', 'number', 'shelf', 'management'];
+  displayedColumns = ['number', 'shelf'];
 
   constructor(
     private storeService: StoreService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     public alertService: AlertService,
@@ -66,6 +70,10 @@ export class DataComponent implements AfterViewInit, OnInit {
         this.hasSeleted = result.source.selected.length > 0;
       }
     );
+    this.authService.user$.subscribe((user: User) => {
+      this.permission = (user.roles.hasOwnProperty('admin') && user.roles.admin) || (user.roles.hasOwnProperty('editor') && user.roles.editor);
+      this.displayedColumns = this.permission ? ['checkbox', 'number', 'shelf', 'management'] : ['number', 'shelf'];
+    })
   }
 
   ngAfterViewInit() {

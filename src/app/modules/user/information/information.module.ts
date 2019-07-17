@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { InformationRoutingModule } from './information-routing.module';
 import { ListComponent } from './list/list.component';
-import { EditComponent } from './edit/edit.component';
 import {
   MatTableModule,
   MatPaginatorModule,
@@ -22,6 +21,8 @@ import {
 } from '@angular/material';
 import { DialogModule } from '../../share/dialog/dialog.module';
 import { AuthRolePipeModule } from '../../share/auth-role-pipe/auth-role-pipe.module';
+import { TemplateModule } from './share/template/template.module';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AuthRolePipeModule } from '../../share/auth-role-pipe/auth-role-pipe.mo
     MatSnackBarModule,
     DialogModule.forRoot(),
     AuthRolePipeModule,
+    TemplateModule.forRoot(),
   ]
 })
 export class InformationModule { }

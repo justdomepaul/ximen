@@ -7,13 +7,14 @@ import { Roles } from '../models/user';
 export class AuthRolePipe implements PipeTransform {
 
   transform(value: Roles, args?: any): string {
+    let permission: string = '一般';
     if (value.hasOwnProperty('admin') && value.admin) {
-      return '管理員';
+      permission = `${permission} | 管理員`;
     }
     if (value.hasOwnProperty('editor') && value.editor) {
-      return '可編輯';
+      permission = `${permission} | 可編輯`;
     }
-    return '一般';
+    return permission;
   }
 
 }

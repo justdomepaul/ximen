@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import {Location} from '@angular/common';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AlertConfig} from '../../../../../core/models/alert-config';
-import {AlertService} from '../../../../../core/services/alert.service';
-import { StoreItem } from 'src/app/core/models/store-item';
+import { User, Roles } from 'src/app/core/models/user';
 import { BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
+import { AlertService } from 'src/app/core/services/alert.service';
+import { AlertConfig } from 'src/app/core/models/alert-config';
+
 
 @Component({
   selector: 'app-create',
@@ -13,19 +14,18 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
-  private _storeItem = new BehaviorSubject<StoreItem>(null);
+  private User$ = new BehaviorSubject<User>(null);
 
-  @Input() new: boolean;
   @Input() title: string;
   @Input()
-  set storeItem(value) {
-    this._storeItem.next(value);
+  set user(value) {
+    this.User$.next(value);
   }
-  get storeItem() {
-    return this._storeItem.getValue();
+  get user() {
+    return this.User$.getValue();
   }
 
-  storeFormGroup: FormGroup;
+  userFormGroup: FormGroup;
   disabled = false;
 
   @Output()
@@ -41,25 +41,14 @@ export class CreateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._storeItem.subscribe(
-      (item: StoreItem) => {
-        this.disabled = !this.new && !item ? true : false;
-        this.storeFormGroup = this.fb.group({
-          productInfo: this.fb.group({
-            number: this.fb.control({
-              value: item ? item.number : '',
-              disabled: this.disabled,
-            }, [Validators.required]),
-            shelf: this.fb.control({
-              value: item ? item.shelf : '',
-              disabled: this.disabled,
-            }, [Validators.required]),
-            // quantity: this.fb.control({
-            //   value: item ? item.quantity : '',
-            //   disabled: this.disabled,
-            // }, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
-          })
-        });
+    this.User$.subscribe(
+      (item: User) => {
+        console.log(item)
+        this.userFormGroup = this.fb.group({
+          admin: [item && item.roles.hasOwnProperty('admin') ? item.roles.admin : false],
+          editor: [item && item.roles.hasOwnProperty('editor') ? item.roles.editor : false],
+          subscriber: [item && item.roles.hasOwnProperty('subscriber') ? item.roles.subscriber : false],
+        }, [Validators.required])
       },
       (err) => {
         this.snackBar.open('權限不足或系統錯誤，請嘗試重整頁面，或聯絡系統管理員。', 'Close', {
@@ -71,14 +60,15 @@ export class CreateComponent implements OnInit {
   }
 
   openDialog() {
-    if (!this.storeFormGroup.valid) {
+    if (!this.userFormGroup.valid) {
       return;
     }
     this.disabled = true;
-    const resp: StoreItem = this.storeFormGroup.value.productInfo;
+    const resp: Roles = this.userFormGroup.value;
+    console.log(resp)
     const dialog = this.alertService.openDialog(<AlertConfig> {
       title: '',
-      description: '是否確認新增庫存',
+      description: '是否確認更新會員權限',
       hiddenCancel: false,
       checkName: '確認',
       cancelName: '取消',
@@ -99,4 +89,5 @@ export class CreateComponent implements OnInit {
   cancel() {
     this.Cancel.emit(false);
   }
+
 }

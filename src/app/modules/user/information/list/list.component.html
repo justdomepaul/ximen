@@ -16,16 +16,32 @@
               aria-label="Elements"
               align="center"
               >
-    <!-- uid Column -->
-    <ng-container matColumnDef="uid">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell">{{row.uid}}</mat-cell>
+
+    <ng-container matColumnDef="management">
+      <mat-header-cell *matHeaderCellDef>
+        <u>管理</u>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="management-cell">
+        <button mat-button color="warn" (click)="edit(row)" class="management-button">編輯</button>
+      </mat-cell>
     </ng-container>
 
     <!-- displayName Column -->
     <ng-container matColumnDef="displayName">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>名稱</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell">{{row.displayName}}</mat-cell>
+        <mat-header-cell  *matHeaderCellDef mat-sort-header>名稱</mat-header-cell>
+        <mat-cell  *matCellDef="let row" class="table-cell">{{row.displayName}}</mat-cell>
+    </ng-container>
+
+    <!-- role Column -->
+    <ng-container matColumnDef="role">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>等級</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.roles | authRole}}</mat-cell>
+    </ng-container>
+
+    <!-- uid Column -->
+    <ng-container matColumnDef="uid">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell">{{row.uid}}</mat-cell>
     </ng-container>
 
     <!-- email Column -->
@@ -38,21 +54,6 @@
     <ng-container matColumnDef="phoneNumber">
       <mat-header-cell  *matHeaderCellDef mat-sort-header>手機號碼</mat-header-cell>
       <mat-cell  *matCellDef="let row" class="table-cell">{{row.phoneNumber}}</mat-cell>
-    </ng-container>
-
-    <!-- role Column -->
-    <ng-container matColumnDef="role">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>等級</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell">{{row.roles | authRole}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="management">
-      <mat-header-cell *matHeaderCellDef>
-        <u>管理</u>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row" class="management-cell">
-        <button mat-button color="warn" (click)="edit(row)" class="management-button">編輯</button>
-      </mat-cell>
     </ng-container>
 
     <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>

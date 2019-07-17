@@ -20,8 +20,8 @@ export class LayoutComponent implements OnInit {
         this.isLargeScreen = state.matches;
       });
     this.authService.user$.subscribe((user: User) => {
-      if (user.roles.hasOwnProperty('admin') && user.roles.admin) {
-        this.admin = true;
+      if (user.roles.hasOwnProperty('admin')) {
+        this.admin = user.roles.admin;
       }
     })
   }

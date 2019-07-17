@@ -1,1 +1,13 @@
-
+.table {
+  &-row {
+    &:hover {
+      background-color: #555555;
+      .table-cell {
+        color: #EEE;
+      }
+    }
+  }
+  &-cell {
+    user-select: text;
+  }
+}
