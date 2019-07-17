@@ -40,14 +40,14 @@
 
     <!-- uid Column -->
     <ng-container matColumnDef="uid">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell">{{row.uid}}</mat-cell>
+      <mat-header-cell  *matHeaderCellDef mat-sort-header class="large-header-cell">ID</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell large-cell">{{row.uid}}</mat-cell>
     </ng-container>
 
     <!-- email Column -->
     <ng-container matColumnDef="email">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-      <mat-cell  *matCellDef="let row" class="table-cell">{{row.email}}</mat-cell>
+      <mat-header-cell  *matHeaderCellDef mat-sort-header class="large-header-cell">Email</mat-header-cell>
+      <mat-cell  *matCellDef="let row" class="table-cell large-cell">{{row.email}}</mat-cell>
     </ng-container>
 
     <!-- phoneNumber Column -->

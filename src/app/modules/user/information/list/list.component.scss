@@ -11,3 +11,9 @@
     user-select: text;
   }
 }
+
+.large {
+  &-header-cell, &-cell {
+    min-width: 250px;
+  }
+}
