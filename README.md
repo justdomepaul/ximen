@@ -39,7 +39,8 @@ service cloud.firestore {
       allow delete: if request.auth.uid != null && getRole('admin');
     }
     match /store/{storeId} {
-    	allow read, write: if request.auth.uid != null;
+    	allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null && (getRole('admin') || getRole('editor'));
     }
   }
 }
