@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyCJnTgAzMbG4ewXXJAcvDGiZIO4saPU8Yg',
-    authDomain: 'stockmanager-xinewei.firebaseapp.com',
-    databaseURL: 'https://stockmanager-xinewei.firebaseio.com',
-    projectId: 'stockmanager-xinewei',
+    apiKey: 'AIzaSyD5f5OdURpSHQrw_f2CfDSn7vPjSv2dZwY',
+    authDomain: 'ximen-f3e00.firebaseapp.com',
+    databaseURL: 'https://ximen-f3e00.firebaseio.com',
+    projectId: 'ximen-f3e00',
     storageBucket: '',
-    messagingSenderId: '158814778102',
-    appId: '1:158814778102:web:ff7fa27761c14b8d'
+    messagingSenderId: '153992421361',
+    appId: '1:153992421361:web:fb1673e129a903e3'
   }
 };
 

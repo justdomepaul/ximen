@@ -28,7 +28,7 @@ export class UserSigninComponent implements OnInit, OnDestroy {
       });
     // FirebaseUI config.
     const uiConfig = {
-      signInSuccessUrl: 'http://localhost:4200/index',
+      signInSuccessUrl: 'https://justdomepaul.github.io/ximen/index',
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         {
@@ -37,7 +37,7 @@ export class UserSigninComponent implements OnInit, OnDestroy {
           // Required to enable ID token credentials for this provider.
           // This can be obtained from the Credentials page of the Google APIs
           // console.
-          clientId: '158814778102-051dt3g9ss17u8v2etav50fespuum1o5.apps.googleusercontent.com',
+          clientId: '153992421361-djk0a9e2k0jvlpg1gdvu1tj630bfsllp.apps.googleusercontent.com',
           customParameters: {
             // Forces account selection even when one account
             // is available.

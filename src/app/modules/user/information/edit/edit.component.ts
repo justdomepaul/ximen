@@ -33,7 +33,7 @@ export class EditComponent implements OnInit {
             panelClass: 'error'
           });
           this.location.back();
-        })
+        });
     });
   }
 

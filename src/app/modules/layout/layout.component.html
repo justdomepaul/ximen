@@ -2,7 +2,7 @@
   <button mat-icon-button (click)="sideLeftNav.toggle()"><mat-icon>{{ sideLeftNav.opened ? 'close' : 'menu' }}</mat-icon></button>
   <h1 class="layout-app-name"><a [routerLink]="['/']">庫存管理中心</a></h1>
   <span class="toolbar-separator"></span>
-  <button mat-icon-button (click)="logout($event)" matTooltip="登出" matTooltipPosition="left">
+  <button mat-icon-button (click)="logout()" matTooltip="登出" matTooltipPosition="left">
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>

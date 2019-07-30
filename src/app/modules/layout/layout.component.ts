@@ -23,7 +23,7 @@ export class LayoutComponent implements OnInit {
       if (user.roles.hasOwnProperty('admin')) {
         this.admin = user.roles.admin;
       }
-    })
+    });
   }
 
   logout() {

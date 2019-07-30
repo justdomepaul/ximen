@@ -23,29 +23,17 @@
           <!--<mat-hint>貨架編號</mat-hint>-->
           <mat-error *ngIf="storeFormGroup.get('productInfo').get('shelf').hasError('required')">請記得輸入貨架</mat-error>
         </mat-form-field>
-        <!--<br/>-->
-        <!--<br/>-->
-        <!--<mat-form-field>-->
-          <!--<input-->
-            <!--matInput-->
-            <!--placeholder="產品數量"-->
-            <!--formControlName="quantity"-->
-          <!--&gt;-->
-          <!--&lt;!&ndash;<mat-hint>產品數量</mat-hint>&ndash;&gt;-->
-          <!--<mat-error *ngIf="storeFormGroup.get('productInfo').get('quantity').hasError('required')">請記得輸入數量</mat-error>-->
-          <!--<mat-error *ngIf="storeFormGroup.get('productInfo').get('quantity').hasError('pattern')">數量必須為數字</mat-error>-->
-        <!--</mat-form-field>-->
       </mat-card-content>
     </mat-card>
     <mat-card class="data-operator">
       <mat-card-content>
         <div class="footer-container">
-          <a mat-raised-button color="accent" (click)="cancel($event)">
+          <a mat-raised-button color="accent" (click)="cancel()">
             <mat-icon>navigate_before</mat-icon>
             回到「布料庫存列表」
           </a>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button color="primary" type="submit" (click)="openDialog($event)" aria-disabled="disabled" *ngIf="!disabled">
+          <button mat-raised-button color="primary" type="submit" (click)="openDialog()" aria-disabled="disabled" *ngIf="!disabled">
             &nbsp;&nbsp;&nbsp;&nbsp;{{title}}&nbsp;<mat-icon class="save-icon">save</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;
           </button>
         </div>
