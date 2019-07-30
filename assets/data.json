@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1827e92e-a62d-4d74-98f4-a120df94a84d",
+    "number": "A001",
+    "shelf": "TestA",
+    "quantity": 5
+  },
+  {
+    "id": "bd9340c1-c533-41f8-9f73-2ba90a42bb01",
+    "number": "A002",
+    "shelf": "TestA",
+    "quantity": 55
+  },
+  {
+    "id": "bd9340c1-c533-41f8-9f73-2ba90a42bb01",
+    "number": "A003",
+    "shelf": "TestB",
+    "quantity": 59
+  },
+  {
+    "id": "bd9340c1-c533-41f8-9f73-2ba90a42bb01",
+    "number": "A004",
+    "shelf": "TestC",
+    "quantity": 15
+  }
+]
